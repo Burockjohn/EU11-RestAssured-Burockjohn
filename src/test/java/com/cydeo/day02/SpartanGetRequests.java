@@ -7,6 +7,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 
 public class SpartanGetRequests {
 
@@ -36,10 +38,10 @@ public class SpartanGetRequests {
 
         //how to do API testing?
         //verify status code is 200
-        Assert.assertEquals(200,response.statusCode());
+        Assertions.assertEquals(200,response.statusCode());
 
         //verify content type is JSON
-        Assert.assertEquals("application/json",response.contentType());
+        Assertions.assertEquals("application/json",response.contentType());
 
     }
 
@@ -49,6 +51,7 @@ public class SpartanGetRequests {
 //    And response Content Type must be application/json
 //    And response body should contain Fidole
 
+    @DisplayName("GET one spartan /api/spartans/3 and verify")
     @Test
     public void test2() {
 
@@ -67,13 +70,13 @@ public class SpartanGetRequests {
 
         //how to do API testing?
         //verify status code is 200
-        Assert.assertEquals(200,response.statusCode());
+        Assertions.assertEquals(200,response.statusCode());
 
         //verify content type is JSON
-        Assert.assertEquals("application/json",response.contentType());
+        Assertions.assertEquals("application/json",response.contentType());
 
         //verify containing Fidole
-        Assert.assertTrue(response.body().asString().contains("Fidole"));
+        Assertions.assertTrue(response.body().asString().contains("Fidole"));
     }
 
 }
