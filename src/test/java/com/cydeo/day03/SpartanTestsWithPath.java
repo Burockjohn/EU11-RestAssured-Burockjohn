@@ -1,5 +1,6 @@
 package com.cydeo.day03;
 
+import com.cydeo.utilities.SpartanTestBase;
 import io.restassured.http.*;
 import io.restassured.response.*;
 import org.junit.jupiter.api.*;
@@ -9,13 +10,7 @@ import java.util.*;
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SpartanTestsWithPath {
-
-    @BeforeAll
-    public static void init() {
-        //save baseurl inside this variable so that we don't need to type each http method.
-        baseURI = "http://54.166.75.122:8000";
-    }
+public class SpartanTestsWithPath extends SpartanTestBase {
 
     /*
      Given accept type is json
