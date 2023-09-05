@@ -14,7 +14,7 @@ public class CBTrainingApiWithJsonPath {
     @BeforeAll
     public static void init(){
         //save baseurl inside this variable so that we dont need to type each http method.
-        baseURI = "http://api.training.cydeo.com";
+        baseURI = "https://api.training.cydeo.com";
 
     }
 
@@ -29,7 +29,6 @@ public class CBTrainingApiWithJsonPath {
                 firstName Glen
                 lastName Funk
                 batch 3
-                section N/A
                 emailAddress lroutham0@opera.com
                 companyName Gabtune
                 state New Jersey
@@ -42,15 +41,36 @@ public class CBTrainingApiWithJsonPath {
                                     .and().pathParam("id", 14)
                             .when().get("/student/{id}");
 
-        response.prettyPrint();
+        //response.prettyPrint();
 
         JsonPath jsonPath = response.jsonPath();
 
+        String first_name = jsonPath.getString("students[0].firstName");
+        String last_name = jsonPath.getString("students[0].lastName");
+        int batchNumber = jsonPath.getInt("students[0].batch");
+        String email = jsonPath.getString("students[0].contact.emailAddress");
+        String companyName = jsonPath.getString("students[0].company.companyName");
+        String state = jsonPath.getString("students[0].company.address.state");
+        int zipCode = jsonPath.getInt("students[0].company.address.zipCode");
+
+        System.out.println("first_name = " + first_name);
+        System.out.println("last_name = " + last_name);
+        System.out.println("batchNumber = " + batchNumber);
+        System.out.println("email = " + email);
+        System.out.println("companyName = " + companyName);
+        System.out.println("state = " + state);
+        System.out.println("zipCode = " + zipCode);
+
+
         assertEquals(200,response.statusCode());
         assertTrue(response.getHeaders().toString().contains("date"));
-        //assertEquals("Glen",jsonPath.getString());
-
-
+        assertEquals("Glen",first_name);
+        assertEquals("Funk",last_name);
+        assertEquals(3,batchNumber);
+        assertEquals("lroutham0@opera.com",email);
+        assertEquals("Gabtune",companyName);
+        assertEquals("New Jersey",state);
+        assertEquals(72475,zipCode);
 
     }
 
