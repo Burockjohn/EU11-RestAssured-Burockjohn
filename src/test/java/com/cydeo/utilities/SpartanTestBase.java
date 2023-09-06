@@ -12,7 +12,7 @@ public abstract class SpartanTestBase {
         //save baseurl inside this variable so that we don't need to type each http method.
         baseURI = "http://54.166.75.122:8000";
 
-        String dbUrl = "jdbc:oracle:thin:@54.166.75.122:1521:xe";
+        String dbUrl = "jdbc:oracle:thin:@54.166.75.122:1521:XE";
         String dbUsername = "SP";
         String dbPassword = "SP";
 
@@ -23,7 +23,7 @@ public abstract class SpartanTestBase {
     @AfterAll
     public static void teardown(){
 
-        //DBUtils.destroy();
+        DBUtils.destroy();
     }
 
 }

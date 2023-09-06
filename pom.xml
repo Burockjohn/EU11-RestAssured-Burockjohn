@@ -59,7 +59,7 @@
 
         <dependency>
             <groupId>com.oracle.ojdbc</groupId>
-            <artifactId>simplefan</artifactId>
+            <artifactId>ojdbc8</artifactId>
             <version>19.3.0.0</version>
         </dependency>
 
