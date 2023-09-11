@@ -78,7 +78,7 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         System.out.println(searchResult.getContent().get(0).getName());
     }
 
-    @DisplayName("FET /spartans/search and save as List<Spartan>")
+    @DisplayName("GET /spartans/search and save as List<Spartan>")
     @Test
     public void test4() {
 
