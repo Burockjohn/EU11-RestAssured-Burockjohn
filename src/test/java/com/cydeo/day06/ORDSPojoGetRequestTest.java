@@ -52,7 +52,7 @@ public class ORDSPojoGetRequestTest extends HRTestBase {
 
         Region region1 = jsonPath.getObject("items[0]", Region.class);
 
-        System.out.println(region1.getRegion_id());
+        System.out.println(region1.getRegionId());
         System.out.println("region1.getRegion_name() = " + region1.getRegion_name());
         System.out.println("region1.getLinks().get(0).getHref() = " + region1.getLinks().get(0).getHref());
 
