@@ -1,5 +1,6 @@
 package com.cydeo.day06;
 
+import com.cydeo.pojo.Search;
 import com.cydeo.pojo.Spartan;
 import com.cydeo.utilities.SpartanTestBase;
 
@@ -61,5 +62,20 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         System.out.println("firstSpartan.getName() = " + firstSpartan.getName());
 
     }
+
+    @Test
+    public void test3() {
+
+        Response response = given().accept(ContentType.JSON)
+                .and().queryParams("nameContains", "a", "gender", "Male")
+                .when().get("api/spartans/search")
+                .then().statusCode(200)
+                .extract().response();
+
+        Search searchResult = response.as(Search.class);
+        System.out.println(searchResult.getContent().get(0).getName());
+    }
+
+
 
 }
