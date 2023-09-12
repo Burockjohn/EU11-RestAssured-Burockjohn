@@ -11,6 +11,7 @@ import java.util.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
+
 public class SpartanPostRequestDemo extends SpartanTestBase {
 
     /*
@@ -29,7 +30,7 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
  and same data what is posted
 */
     @Test
-    public void postMethod1(){
+    public void postMethod1() {
 
         String requestJsonBody = "{\"gender\":\"Male\",\n" +
                 "\"name\":\"Severus\",\n" +
@@ -42,27 +43,27 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
                 .post("/api/spartans");
 
         //verify status code
-        assertThat(response.statusCode(),is(201));
-        assertThat(response.contentType(),is("application/json"));
+        assertThat(response.statusCode(), is(201));
+        assertThat(response.contentType(), is("application/json"));
 
         String expectedResponseMessage = "A Spartan is Born!";
-        assertThat(response.path("success"),is(expectedResponseMessage));
-        assertThat(response.path("data.name"),is("Severus"));
-        assertThat(response.path("data.gender"),is("Male"));
-        assertThat(response.path("data.phone"),is(8877445596L));
+        assertThat(response.path("success"), is(expectedResponseMessage));
+        assertThat(response.path("data.name"), is("Severus"));
+        assertThat(response.path("data.gender"), is("Male"));
+        assertThat(response.path("data.phone"), is(8877445596L));
 
     }
 
 
     @DisplayName("POST with Map to JSON")
     @Test
-    public void postMethod2(){
+    public void postMethod2() {
 
         //create a map to keep request json body information
-        Map<String,Object> requestJsonMap = new LinkedHashMap<>();
-        requestJsonMap.put("name","Burak");
-        requestJsonMap.put("gender","Male");
-        requestJsonMap.put("phone",8877445596L);
+        Map<String, Object> requestJsonMap = new LinkedHashMap<>();
+        requestJsonMap.put("name", "Burak");
+        requestJsonMap.put("gender", "Male");
+        requestJsonMap.put("phone", 8877445596L);
 
 
         Response response = given().accept(ContentType.JSON).and() //what we are asking from api which is JSON response
@@ -72,21 +73,21 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
                 .post("/api/spartans");
 
         //verify status code
-        assertThat(response.statusCode(),is(201));
-        assertThat(response.contentType(),is("application/json"));
+        assertThat(response.statusCode(), is(201));
+        assertThat(response.contentType(), is("application/json"));
 
         String expectedResponseMessage = "A Spartan is Born!";
-        assertThat(response.path("success"),is(expectedResponseMessage));
-        assertThat(response.path("data.name"),is("Burak"));
-        assertThat(response.path("data.gender"),is("Male"));
-        assertThat(response.path("data.phone"),is(8877445596L));
+        assertThat(response.path("success"), is(expectedResponseMessage));
+        assertThat(response.path("data.name"), is("Burak"));
+        assertThat(response.path("data.gender"), is("Male"));
+        assertThat(response.path("data.phone"), is(8877445596L));
 
         response.prettyPrint();
     }
 
     @DisplayName("POST with Map to Spartan Class")
     @Test
-    public void postMethod3(){
+    public void postMethod3() {
         //create one object from your pojo, send it as a JSON
         Spartan spartan = new Spartan();
         spartan.setName("Burockjohn");
@@ -102,14 +103,14 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
                 .post("/api/spartans");
 
         //verify status code
-        assertThat(response.statusCode(),is(201));
-        assertThat(response.contentType(),is("application/json"));
+        assertThat(response.statusCode(), is(201));
+        assertThat(response.contentType(), is("application/json"));
 
         String expectedResponseMessage = "A Spartan is Born!";
-        assertThat(response.path("success"),is(expectedResponseMessage));
-        assertThat(response.path("data.name"),is("Burockjohn"));
-        assertThat(response.path("data.gender"),is("Male"));
-        assertThat(response.path("data.phone"),is(8877445596L));
+        assertThat(response.path("success"), is(expectedResponseMessage));
+        assertThat(response.path("data.name"), is("Burockjohn"));
+        assertThat(response.path("data.gender"), is("Male"));
+        assertThat(response.path("data.phone"), is(8877445596L));
 
         response.prettyPrint();
 
@@ -118,7 +119,7 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
 
     @DisplayName("POST with Map to Spartan Class")
     @Test
-    public void postMethod4(){
+    public void postMethod4() {
         //this example we implement serialization with creating spartan object sending as a request body
         //also implemented deserialization getting the id,sending get request and saving that body as a response
 
@@ -149,10 +150,10 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
                 .when().get("/api/spartans/{id}")
                 .then().statusCode(200).log().all().extract().as(Spartan.class);
 
-        assertThat(spartanPosted.getName(),is(spartan.getName()));
-        assertThat(spartanPosted.getGender(),is(spartan.getGender()));
-        assertThat(spartanPosted.getPhone(),is(spartan.getPhone()));
-        assertThat(spartanPosted.getId(),is(idFromPost));
+        assertThat(spartanPosted.getName(), is(spartan.getName()));
+        assertThat(spartanPosted.getGender(), is(spartan.getGender()));
+        assertThat(spartanPosted.getPhone(), is(spartan.getPhone()));
+        assertThat(spartanPosted.getId(), is(idFromPost));
 
     }
 
