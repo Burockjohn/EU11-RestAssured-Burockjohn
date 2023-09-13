@@ -157,11 +157,30 @@ public class SpartanPostRequestDemo extends SpartanTestBase {
 
     }
 
+    @DisplayName("POST with Map to JSON by using SpartanUtils")
+    @Test
+    public void test1() {
 
-    //Create one SpartanUtil class
-    //create a static method that returns Map<String,Object>
-    //use faker library(add as a dependency) to assign each time different information
-    //for name,gender,phone number
-    //then use your method for creating spartan as a map,dynamically.
+        Response response = given().accept(ContentType.JSON).and() //what we are asking from api which is JSON response
+                .contentType(ContentType.JSON) //what we are sending to api, which is JSON also
+                .body(SpartanUtils.createSpartan()).log().all()
+                .when()
+                .post("/api/spartans");
+
+        //verify status code
+        assertThat(response.statusCode(), is(201));
+        assertThat(response.contentType(), is("application/json"));
+
+        String expectedResponseMessage = "A Spartan is Born!";
+        assertThat(response.path("success"), is(expectedResponseMessage));
+
+        //Create one SpartanUtil class
+        //create a static method that returns Map<String,Object>
+        //use faker library(add as a dependency) to assign each time different information
+        //for name,gender,phone number
+        //then use your method for creating spartan as a map,dynamically.
+
+    }
+
 
 }
