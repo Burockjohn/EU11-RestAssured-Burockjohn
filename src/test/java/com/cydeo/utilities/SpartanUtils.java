@@ -5,6 +5,7 @@ import com.github.javafaker.Faker;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class SpartanUtils {
 
@@ -12,18 +13,19 @@ public class SpartanUtils {
 
         Map<String, Object> spartaAsMap = new LinkedHashMap<>();
         Faker faker = new Faker();
+        Random random = new Random();
         Spartan spartan = new Spartan();
 
-        int phoneLength = faker.number().numberBetween(10, 14);
+        int phoneLength = random.nextInt(4)+10; //  int phoneLength = faker.number().numberBetween(10, 14);
         String phoneNumber = "";
 
-        int randomN = faker.number().numberBetween(0, 2);
+        int randomN = random.nextInt(2); // int randomN = faker.number().numberBetween(0, 2);
 
         spartan.setName(faker.name().firstName());
         spartaAsMap.put("name", spartan.getName());
 
         for (int i = 0; i < phoneLength; i++) {
-            int digit = faker.number().numberBetween(0, 10);
+            int digit = random.nextInt(10);
             phoneNumber += digit;
         }
         spartan.setPhone(Long.valueOf(phoneNumber));
