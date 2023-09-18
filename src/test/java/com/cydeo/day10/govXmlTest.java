@@ -32,7 +32,7 @@ public class govXmlTest {
         List<Integer> unknowns = xmlPath.getList("response.row.row.unknown");
         System.out.println("unknowns = " + unknowns);
         //get 2005 other
-        List<Integer> other2005 = xmlPath.getList("response.row.row[2].other");
+        int other2005 = xmlPath.getInt("response.row.row[2].other");
         System.out.println("other2005 = " + other2005);
         //get 2007 _address
         String address2007 = xmlPath.getString("response.row.row[4].@_address");
